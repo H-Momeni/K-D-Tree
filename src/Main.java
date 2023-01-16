@@ -31,15 +31,15 @@ public class Main {
             }
         }
         t1 = t1.CreateTree(arr);
-
+        float point1[] = {11, 19};
 
         // for (int i = 0; i < n; i++) {
         // root = t1.insertNode(root, arr[i]);
         // }
         
-        // System.out.println(t1.k);
+         System.out.println(t1.searchNode(t1.root1, point1));
         // System.out.println("*******");
-        // System.out.println(root.right.left.right.point[0]);
+         //System.out.println(t1.root1.right.left.right.point[0]);
         // System.out.println(root.right.left.right.point[1]);
         // System.out.println(root.right.left.right.point[2]);
 

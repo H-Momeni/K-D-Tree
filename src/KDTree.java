@@ -1,5 +1,6 @@
 public class KDTree {
     int k;
+    Node root1=null;
 
     public KDTree(int k) {
         this.k = k;
@@ -32,7 +33,8 @@ public class KDTree {
             root.left = insert(root.left, point, depth + 1);
         else
             root.right = insert(root.right, point, depth + 1);
-
+            
+        root1=root;
         return root;
 
     }
