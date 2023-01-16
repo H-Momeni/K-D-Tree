@@ -41,13 +41,13 @@ public class Main {
                 arr[i][j] = Float.parseFloat(num[j]);
             }
         }
-        
 
-    
         t1 = t1.CreateTree(arr);
+        float point1[] = { 6 , 12 };
+        t1.root1 = t1.deleteNode(t1.root1, point1);
        t1.inOrder(t1.root1);
-        // float point1[] = { 3, 6 };
-        // t1.root1 = t1.deleteNode(t1.root1, point1);
+        // 
+        // 
         // System.out.println(t1.root1.point[0]);
         // System.out.println(t1.root1.point[1]);
         // for (int i = 0; i < n; i++) {
@@ -56,8 +56,10 @@ public class Main {
 
         // System.out.println(t1.searchNode(t1.root1, point1));
         // System.out.println("*******");
-        // System.out.println(t1.root1.right.left.right.point[0]);
-        // System.out.println(t1.root1.right.left.point[1]);
+        // System.out.println(t1.root1.right.right.point[0]);
+        // System.out.println(t1.root1.right.right.point[1]);
+        // System.out.println(t1.root1.right.right.left.point[0]);
+        // System.out.println(t1.root1.right.right.left.point[1]);
         // System.out.println(root.right.left.right.point[2]);
 
     }

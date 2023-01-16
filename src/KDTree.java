@@ -79,9 +79,10 @@ public class KDTree {
             {
                 Node min = findMin(root.left, cd);
                 copyPoint(root.point, min.point);
-                root.right = delete(root.left, min.point, depth + 1);
+                root.left = delete(root.left, min.point, depth + 1); //khodam dorostesh kardam
             } else {
                 // delete root;
+                root=null;
                 return null;
             }
             return root;
