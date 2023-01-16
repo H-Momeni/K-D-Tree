@@ -125,4 +125,20 @@ public class KDTree {
             res = z;
         return res;
     }
+
+    public void inOrder(Node root) {
+        if (root == null) {
+          return;
+        }
+        inOrder(root.left);
+        printTree(root);
+        System.out.print("\n");
+        inOrder(root.right);
+    }
+
+    public void printTree(Node root){
+        for(int i=0;i<k;i++){
+            System.out.print(root.point[i]+" ");
+        }
+    }
 }
