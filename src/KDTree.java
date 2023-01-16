@@ -22,6 +22,7 @@ public class KDTree {
             root.right = insert(root.right, point, depth + 1);
 
         return root;
+        
 
     }
 
