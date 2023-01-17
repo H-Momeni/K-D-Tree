@@ -1,6 +1,7 @@
 public class KDTree {
     int k;
     Node root1 = null;
+    Node curr = null;
 
     public KDTree(int k) {
         this.k = k;
@@ -26,7 +27,6 @@ public class KDTree {
             return new Node(k, point);
 
         int cd = depth % k;
-
         if (point[cd] < (root.point[cd]))
             root.left = insert(root.left, point, depth + 1);
         else
@@ -34,6 +34,56 @@ public class KDTree {
 
         root1 = root;
         return root;
+
+    }
+
+    public Node findParent(Node root, float[] point, int depth, Node parent) {
+
+        if (root == null) {
+            // System.out.println("*********");
+            System.out.println(parent.point[0]);
+            // System.out.println(parent.point[1]);
+            // System.out.println(root1.left.point[1]);
+
+            // distance(point, parent);
+            curr = parent;
+            return parent;
+
+        }
+
+        int cd = depth % k;
+        System.out.println(parent.point[0]);
+        if (point[cd] < (root.point[cd]))
+            root.left = findParent(root.left, point, depth + 1, root);
+        else
+            root.right = findParent(root.right, point, depth + 1, root);
+
+        root1 = root;
+        return curr;
+
+    }
+
+    public Node Parent(Node root, float[] point) {
+
+        return findParent(root, point, 0, root);
+
+    }
+
+    public float distance(float[] point, Node parent) {
+        Double sum = 0.0;
+        Double a = 0.0;
+        Double b = 0.0;
+        Double c = 0.0;
+        Float reason;
+        for (int i = 0; i < k; i++) {
+            a = Double.valueOf(point[i]);
+            b = Double.valueOf(parent.point[i]);
+            c = a - b;
+            sum = Math.pow(c, 2);
+        }
+        sum = Math.sqrt(sum);
+        reason = sum.floatValue();
+        return reason;
 
     }
 
@@ -79,10 +129,10 @@ public class KDTree {
             {
                 Node min = findMin(root.left, cd);
                 copyPoint(root.point, min.point);
-                root.left = delete(root.left, min.point, depth + 1); //khodam dorostesh kardam
+                root.left = delete(root.left, min.point, depth + 1); // khodam dorostesh kardam
             } else {
                 // delete root;
-                root=null;
+                root = null;
                 return null;
             }
             return root;
@@ -129,7 +179,7 @@ public class KDTree {
 
     public void inOrder(Node root) {
         if (root == null) {
-          return;
+            return;
         }
         inOrder(root.left);
         printTree(root);
@@ -137,9 +187,9 @@ public class KDTree {
         inOrder(root.right);
     }
 
-    public void printTree(Node root){
-        for(int i=0;i<k;i++){
-            System.out.print(root.point[i]+" ");
+    public void printTree(Node root) {
+        for (int i = 0; i < k; i++) {
+            System.out.print(root.point[i] + " ");
         }
     }
 }

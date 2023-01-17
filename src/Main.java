@@ -43,11 +43,18 @@ public class Main {
         }
 
         t1 = t1.CreateTree(arr);
-        float point1[] = { 6 , 12 };
-        t1.root1 = t1.deleteNode(t1.root1, point1);
-       t1.inOrder(t1.root1);
-        // 
-        // 
+        float point1[] = { 51, 45 };
+        // t1.root1 = t1.deleteNode(t1.root1, point1);
+
+        Node emt = t1.Parent(t1.root1, point1);
+        float b=t1.distance(point1, emt);
+
+        System.out.println("*********");
+         System.out.println(emt.point[0]);
+         System.out.println(b);
+        // t1.inOrder(t1.root1);
+        //
+        //
         // System.out.println(t1.root1.point[0]);
         // System.out.println(t1.root1.point[1]);
         // for (int i = 0; i < n; i++) {
