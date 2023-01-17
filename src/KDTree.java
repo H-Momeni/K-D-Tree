@@ -40,19 +40,12 @@ public class KDTree {
     public Node findParent(Node root, float[] point, int depth, Node parent) {
 
         if (root == null) {
-            // System.out.println("*********");
-            System.out.println(parent.point[0]);
-            // System.out.println(parent.point[1]);
-            // System.out.println(root1.left.point[1]);
-
-            // distance(point, parent);
             curr = parent;
             return parent;
-
         }
 
         int cd = depth % k;
-        System.out.println(parent.point[0]);
+
         if (point[cd] < (root.point[cd]))
             root.left = findParent(root.left, point, depth + 1, root);
         else
@@ -64,9 +57,7 @@ public class KDTree {
     }
 
     public Node Parent(Node root, float[] point) {
-
         return findParent(root, point, 0, root);
-
     }
 
     public float distance(float[] point, Node parent) {
@@ -79,12 +70,11 @@ public class KDTree {
             a = Double.valueOf(point[i]);
             b = Double.valueOf(parent.point[i]);
             c = a - b;
-            sum = Math.pow(c, 2);
+            sum = sum + Math.pow(c, 2);
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
         return reason;
-
     }
 
     public boolean searchNode(Node root, float point[]) {
