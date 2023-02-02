@@ -81,7 +81,7 @@ public class KDTree {
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
-        //System.out.println(parent.point[0]+"\t"+parent.point[1]+"\t"+reason);
+         System.out.println(reason);
         return reason;
     }
 
@@ -276,14 +276,21 @@ public class KDTree {
         return root_copy;
     }
 
-    public void findmnn(float[] point, int m, KDTree t1) {
+    public float[][] findmnn(float[] point, int m, KDTree t1) {
         KDTree t2 = new KDTree(k);
+        float[][] ans = new float[m][k + 1];
         t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
         for (int i = 0; i < m; i++) {
-            Node emt = t1.nearestNeighbor(t2.root1, point);
-            System.out.println(emt.point[0]+"\t"+emt.point[1]);
-            t2.root1 = t2.deleteNode(t2.root1, emt.point);
+            for (int j = 0; j < k ; j++) {  //niaz be eslah k baray adi k+1 bara knnclassify
+                Node emt = t2.nearestNeighbor(t2.root1, point);
+                ans[i][j] = emt.point[j];
+                //System.out.println(emt.point[0] + "\t" + emt.point[1]);
+                t2.root1 = t2.deleteNode(t2.root1, emt.point);
+            }
         }
+
+       
+        return ans;
 
     }
 

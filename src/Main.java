@@ -19,22 +19,27 @@ class Node {
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner input = new Scanner(System.in);
+       // Scanner input = new Scanner(System.in);
 
         Scanner scanner = new Scanner(new File("C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\noghat.txt"));
         String txt = scanner.useDelimiter("\\A").next();
         scanner.close();
         // System.out.println(txt);
         String[] parts = txt.split("\\r?\\n");
-        String[] num = new String[20000]; // 20000 boad hadeaksar
+        String[] num = new String[10000]; // 10000 boad hadeaksar
         String[] count = parts[0].split(" ");
+
+        Scanner out = new Scanner(new File("C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\train.txt"));
+        String text = out.useDelimiter("\\A").next();
+        out.close();
+        // System.out.println(txt);
+        String[] parts1 = text.split("\\r?\\n");
 
         int n = parts.length;
         int k = count.length;
 
-        float[][] arr = new float[n][k];
+        float[][] arr = new float[n][k + 1];
         KDTree t1 = new KDTree(k);
-        KNNClassifier example = new KNNClassifier(arr, 5);
 
         for (int i = 0; i < n; i++) {
             num = parts[i].split(" ");
@@ -43,11 +48,28 @@ public class Main {
             }
         }
 
+        for (int i = 0; i < n; i++) {
+            arr[i][784] = Float.parseFloat(parts1[i]);
+        }
+        //System.out.print(arr[100][784]);
+        KNNClassifier example = new KNNClassifier(arr, 2); // jaye 5 adad delkhah
+
+        // System.out.print(arr[1][784]);
+
         // t1 = t1.CreateTree(arr);
 
-        // float point1[] = { 25, 70 };
+         float point1[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,203,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,253,252,56,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,253,252,143,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,163,253,252,168,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,241,255,253,106,0,0,0,0,0,0,0,0,0,0,0,0,0,45,169,113,0,0,0,0,0,0,0,85,252,253,240,43,0,0,0,0,0,0,0,0,0,0,0,0,0,229,252,168,0,0,0,0,0,0,0,123,252,253,196,0,0,0,0,0,0,0,0,0,0,0,0,0,51,253,252,168,0,0,0,0,0,0,0,197,252,253,96,0,0,0,0,0,0,0,0,0,0,0,0,48,241,254,253,168,0,0,0,0,0,0,120,253,253,251,75,0,0,0,0,0,0,0,0,0,0,0,38,172,252,253,252,224,169,108,57,38,0,7,187,252,252,200,0,0,0,0,0,0,0,0,0,0,0,0,169,252,252,253,252,252,252,253,252,234,197,154,252,252,252,76,0,0,0,0,0,0,0,0,0,0,0,13,206,252,252,253,252,252,252,253,252,252,252,253,252,252,252,0,0,0,0,0,0,0,0,0,0,0,0,0,76,150,175,126,225,225,225,254,253,253,253,254,253,253,128,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,84,215,252,253,252,196,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,240,252,253,208,37,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,114,206,252,252,253,96,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,128,254,253,253,253,151,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,114,234,252,253,252,233,145,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,169,252,252,253,196,62,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,228,202,78,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
-        // t1.findmnn(point1, 3, t1);
+       
+         example.classify(point1);
+        //  float[][] arr1 = new float[n][k + 1];
+
+        //  arr1=t1.findmnn(point1, 3, t1);
+        //  for (int i = 0; i < 3; i++){
+        //     for (int j = 0; j < k; j++)
+        //     System.out.println(arr1[i][j]);
+        //  }
+
         // KDTree t2=new KDTree(k); //in derakht baray peyda kardan m va n karbord darad
         // KDTree t2 = new KDTree(k);
         // t1.inOrder(t1.root1);
@@ -56,7 +78,7 @@ public class Main {
         // t2.root1 = t2.deleteNode(t2.root1, point1);
         // t2.inOrder(t2.root1);
         // System.out.println("*************");
-        // t1.inOrder(t1.root1);
+        //t1.inOrder(t1.root1);
 
         // Node mesal=t1.cloneBinaryTree(t1.root1);
         // System.out.println(mesal.right.right.point[0]);
