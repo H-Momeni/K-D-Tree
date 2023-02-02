@@ -17,6 +17,12 @@ public class KDTree {
 
     }
 
+    public KDTree insertCopy(Node r) {
+        KDTree t = new KDTree(k);
+        t.root1 = r;
+        return t;
+    }
+
     public Node insertNode(Node root, float[] point) {
         return insert(root, point, 0);
 
@@ -75,6 +81,7 @@ public class KDTree {
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
+        //System.out.println(parent.point[0]+"\t"+parent.point[1]+"\t"+reason);
         return reason;
     }
 
@@ -243,8 +250,8 @@ public class KDTree {
         if (n1 == null)
             return n0;
 
-        float d1 = distance( target,n0);
-        float d2 = distance( target,n1);
+        float d1 = distance(target, n0);
+        float d2 = distance(target, n1);
 
         if (d1 < d2)
             return n0;
@@ -252,5 +259,32 @@ public class KDTree {
             return n1;
     }
 
-    
+    public Node cloneBinaryTree(Node root) {
+        // base case
+        if (root == null) {
+            return null;
+        }
+
+        // create a new node with the same data as the root node
+        Node root_copy = new Node(k, root.point);
+
+        // clone the left and right subtree
+        root_copy.left = cloneBinaryTree(root.left);
+        root_copy.right = cloneBinaryTree(root.right);
+
+        // return cloned root node
+        return root_copy;
+    }
+
+    public void findmnn(float[] point, int m, KDTree t1) {
+        KDTree t2 = new KDTree(k);
+        t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
+        for (int i = 0; i < m; i++) {
+            Node emt = t1.nearestNeighbor(t2.root1, point);
+            System.out.println(emt.point[0]+"\t"+emt.point[1]);
+            t2.root1 = t2.deleteNode(t2.root1, emt.point);
+        }
+
+    }
+
 }
