@@ -21,12 +21,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(new File("C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\test.txt"));
+        Scanner scanner = new Scanner(new File("C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\noghat.txt"));
         String txt = scanner.useDelimiter("\\A").next();
         scanner.close();
-
+        // System.out.println(txt);
         String[] parts = txt.split("\\r?\\n");
-        String[] num = new String[100]; // 100 boad hadeaksar
+        String[] num = new String[20000]; // 20000 boad hadeaksar
         String[] count = parts[0].split(" ");
 
         int n = parts.length;
@@ -34,6 +34,7 @@ public class Main {
 
         float[][] arr = new float[n][k];
         KDTree t1 = new KDTree(k);
+        KNNClassifier example = new KNNClassifier(arr, 5);
 
         for (int i = 0; i < n; i++) {
             num = parts[i].split(" ");
@@ -42,19 +43,17 @@ public class Main {
             }
         }
 
-        t1 = t1.CreateTree(arr);
+        // t1 = t1.CreateTree(arr);
 
+        // float point1[] = { 25, 70 };
 
-        float point1[] = { 25, 70 };
-
-
-       t1.findmnn(point1, 3, t1);
+        // t1.findmnn(point1, 3, t1);
         // KDTree t2=new KDTree(k); //in derakht baray peyda kardan m va n karbord darad
-       // KDTree t2 = new KDTree(k);
+        // KDTree t2 = new KDTree(k);
         // t1.inOrder(t1.root1);
-      //  t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
+        // t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
 
-       // t2.root1 = t2.deleteNode(t2.root1, point1);
+        // t2.root1 = t2.deleteNode(t2.root1, point1);
         // t2.inOrder(t2.root1);
         // System.out.println("*************");
         // t1.inOrder(t1.root1);
@@ -66,13 +65,13 @@ public class Main {
 
         // Node emt = t1.Parent(t1.root1, point1);
 
-        Node emt = t1.nearestNeighbor(t1.root1, point1);
-       // float b = t1.distance(point1, emt);
+        // Node emt = t1.nearestNeighbor(t1.root1, point1);
+        // float b = t1.distance(point1, emt);
         // System.out.println("*********");
-          System.out.println(emt.point[0]);
-          System.out.println(emt.point[1]);
+        // System.out.println(emt.point[0]);
+        // System.out.println(emt.point[1]);
         // System.out.println(b);
-      //  float[][] arr1 = new float[2][k];
+        // float[][] arr1 = new float[2][k];
         // arr1=t1.bounds(point1, b);
         // for (int j = 0; j < 2; j++) {
         // for (int i = 0; i < k; i++) {
