@@ -71,10 +71,26 @@ public class KDTree {
             b = Double.valueOf(parent.point[i]);
             c = a - b;
             sum = sum + Math.pow(c, 2);
+            //System.out.println(a+"-"+b+"="+c+"\t"+sum);
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
         return reason;
+    }
+
+    public float[][] bounds(float[] point, float r) {
+        float arr[][] = new float[2][k];
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < k; i++) {
+                if (j == 0) { // hade payeen
+                    arr[j][i] = point[i] - r;
+                }
+                if (j == 1) { // hade bala
+                    arr[j][i] = point[i] + r;
+                }
+            }
+        }
+        return arr;
     }
 
     public boolean searchNode(Node root, float point[]) {
