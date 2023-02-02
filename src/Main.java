@@ -46,21 +46,26 @@ public class Main {
         float point1[] = { 52, 2 };
         // t1.root1 = t1.deleteNode(t1.root1, point1);
 
-        Node emt = t1.Parent(t1.root1, point1);
-        float b = t1.distance(point1, emt);
-
+       // Node emt = t1.Parent(t1.root1, point1);
+        
+      Node emt = t1.nearestNeighbor(t1.root1, point1);
+float b = t1.distance(point1, emt);
         // System.out.println("*********");
-        //  System.out.println(emt.point[0]);
-        //  System.out.println(emt.point[1]);
+          System.out.println(emt.point[0]);
+          System.out.println(emt.point[1]);
         System.out.println(b);
         float[][] arr1=new float[2][k];
-        arr1=t1.bounds(point1, b);
-        for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < k; i++) {
-                System.out.print(arr1[j][i]+"\t");
-            }
-            System.out.print("\n");
-        }
+       // arr1=t1.bounds(point1, b);
+        // for (int j = 0; j < 2; j++) {
+        //     for (int i = 0; i < k; i++) {
+        //         System.out.print(arr1[j][i]+"\t");
+        //     }
+        //     System.out.print("\n");
+        // }
+        
+
+
+
         // t1.inOrder(t1.root1);
         //
         //

@@ -71,7 +71,7 @@ public class KDTree {
             b = Double.valueOf(parent.point[i]);
             c = a - b;
             sum = sum + Math.pow(c, 2);
-            //System.out.println(a+"-"+b+"="+c+"\t"+sum);
+            // System.out.println(a+"-"+b+"="+c+"\t"+sum);
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
@@ -198,4 +198,59 @@ public class KDTree {
             System.out.print(root.point[i] + " ");
         }
     }
+
+    public Node nearestNeighbor(Node root, float[] target) {
+        return nearestNeighbor(root, target, 0);
+    }
+
+    public Node nearestNeighbor(Node root, float[] target, int depth) {
+
+        if (root == null)
+            return null;
+
+        Node nextBranch = null;
+        Node otherBranch = null;
+        int cd = depth % k;
+        // compare the property appropriate for the current depth
+        if (target[cd] < root.point[cd]) {
+            nextBranch = root.left;
+            otherBranch = root.right;
+        } else {
+            nextBranch = root.right;
+            otherBranch = root.left;
+        }
+
+        // recurse down the branch that's best according to the current depth
+        Node temp = nearestNeighbor(nextBranch, target, depth + 1);
+        Node best = closest(temp, root, target);
+
+        float radiusSquared = distance(target, best);
+
+        float dist = target[cd] - root.point[cd];
+
+        if (radiusSquared >= dist * dist) {
+            temp = nearestNeighbor(otherBranch, target, depth + 1);
+            best = closest(temp, best, target);
+        }
+
+        return best;
+    }
+
+    public Node closest(Node n0, Node n1, float[] target) {
+        if (n0 == null)
+            return n1;
+
+        if (n1 == null)
+            return n0;
+
+        float d1 = distance( target,n0);
+        float d2 = distance( target,n1);
+
+        if (d1 < d2)
+            return n0;
+        else
+            return n1;
+    }
+
+    
 }
