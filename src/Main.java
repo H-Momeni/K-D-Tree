@@ -19,7 +19,7 @@ class Node {
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        // Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         Scanner scanner = new Scanner(new File("C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\noghat.txt"));
         String txt = scanner.useDelimiter("\\A").next();
@@ -52,11 +52,11 @@ public class Main {
             arr[i][784] = Float.parseFloat(parts1[i]);
         }
         // System.out.print(arr[100][784]);
-         KNNClassifier example = new KNNClassifier(arr, 4); // jaye 5 adad delkhah
+        KNNClassifier example = new KNNClassifier(arr, 3); // jaye 5 adad delkhah
         // for (int i = 0; i < arr[1].length; i++){
         // System.out.print(arr[1][i]+" ");}
 
-      //  t1 = t1.CreateTree(arr);
+        // t1 = t1.CreateTree(arr);
         // t1.inOrder(t1.root1);
 
         float point1[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,11 +86,37 @@ public class Main {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, -1 }; // barchasb diffult ro -1 migiram
         float point2[] = { 25, 70 };
-            float javab;
-        javab= example.classify(point1);
-        System.out.println(javab);
+        float javab;
+       // javab = example.classify(point1);
+        //System.out.println(javab);
         float[][] arr1 = new float[n][k + 1];
-       // System.out.println(k);
+            
+        System.out.println("How many points do you want to enter?");
+        int z = input.nextInt();
+        float [] zzzz=new float [z];
+        float [] aaaa=new float [z];
+
+       // double v=0;
+        for (int i = 0; i < z; i++) {
+            for (int j = 0; j < k + 1; j++) {
+                arr1[i][j]=input.nextFloat();
+            }
+        }
+        System.out.println("--------------");
+        for (int j = 0; j < z; j++) {
+            aaaa[j]=input.nextFloat();
+        }
+
+        zzzz=example.classifyAll(arr1, z);
+        // for (int j = 0; j < z; j++) {
+        //     System.out.println(zzzz[j]);
+        // }
+        
+       example.accuracy( zzzz,aaaa, z);
+       // System.out.println(v);
+
+
+        // System.out.println(k);
 
         // arr1 = t1.findmnn(point1, 2, t1);
         // System.out.println("-------------------------");

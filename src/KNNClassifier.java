@@ -55,5 +55,34 @@ public class KNNClassifier {
 
     }
 
-    
+    public float[] classifyAll(float[][] point, int num) {
+        float[] javab = new float[num];
+
+        for (int i = 0; i < num; i++) {
+            javab[i] = classify(point[i]);
+        }
+
+        return javab;
+
+    }
+
+    public void accuracy(float[]point,float[]dorost, int num){
+        int count=0;
+       
+      //  System.out.println("*--------------------"+num);
+        for(int i=0;i<point.length;i++){
+
+           // System.out.println(point[i]+"\t"+dorost[i]);
+            if(point[i]==dorost[i]){
+                count++;
+            }
+        }
+        System.out.println(count*100/num+"%");
+        
+
+
+        
+
+        
+    }
 }
