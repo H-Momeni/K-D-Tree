@@ -246,18 +246,18 @@ public class KDTree {
         t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
         //System.out.println(t1);
         //System.out.println(t2);
-
+        //t2.inOrder(t2.root1);
         for (int i = 0; i < m; i++) {
             Node emt = t2.nearestNeighbor(t2.root1, point);
-            for (int j = 0; j < k+1; j++) { // niaz be eslah k baray adi k+1 bara knnclassify
+            for (int j = 0; j < k; j++) { // niaz be eslah k baray adi k+1 bara knnclassify
                 
-                // if (emt != null){
+               // System.out.print(emt.point[j]+" ");
                 ans[i][j] = emt.point[j];
                 // System.out.println(emt.point[0] + "\t" + emt.point[1]);
                 // System.out.print("hey"+ans[i][j]+"\t");
                  
             }
-           // System.out.print("\n");
+           //System.out.print("***********************************\n");
             t2.root1=t2.deleteNode(t2.root1, emt.point);
         }
 
