@@ -43,29 +43,6 @@ public class KDTree {
 
     }
 
-    public Node findParent(Node root, float[] point, int depth, Node parent) {
-
-        if (root == null) {
-            curr = parent;
-            return parent;
-        }
-
-        int cd = depth % k;
-
-        if (point[cd] < (root.point[cd]))
-            root.left = findParent(root.left, point, depth + 1, root);
-        else
-            root.right = findParent(root.right, point, depth + 1, root);
-
-        root1 = root;
-        return curr;
-
-    }
-
-    public Node Parent(Node root, float[] point) {
-        return findParent(root, point, 0, root);
-    }
-
     public float distance(float[] point, Node parent) {
         Double sum = 0.0;
         Double a = 0.0;
@@ -81,23 +58,8 @@ public class KDTree {
         }
         sum = Math.sqrt(sum);
         reason = sum.floatValue();
-         System.out.println(reason);
+        // System.out.println(reason);
         return reason;
-    }
-
-    public float[][] bounds(float[] point, float r) {
-        float arr[][] = new float[2][k];
-        for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < k; i++) {
-                if (j == 0) { // hade payeen
-                    arr[j][i] = point[i] - r;
-                }
-                if (j == 1) { // hade bala
-                    arr[j][i] = point[i] + r;
-                }
-            }
-        }
-        return arr;
     }
 
     public boolean searchNode(Node root, float point[]) {
@@ -196,7 +158,7 @@ public class KDTree {
         }
         inOrder(root.left);
         printTree(root);
-        System.out.print("\n");
+        System.out.print("*******\n");
         inOrder(root.right);
     }
 
@@ -278,18 +240,27 @@ public class KDTree {
 
     public float[][] findmnn(float[] point, int m, KDTree t1) {
         KDTree t2 = new KDTree(k);
-        float[][] ans = new float[m][k + 1];
+       // t2.root1=t1.cloneBinaryTree(t1.root1);
+        
+        float[][] ans = new float[m][k + 2];
         t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
+        //System.out.println(t1);
+        //System.out.println(t2);
+
         for (int i = 0; i < m; i++) {
-            for (int j = 0; j < k ; j++) {  //niaz be eslah k baray adi k+1 bara knnclassify
-                Node emt = t2.nearestNeighbor(t2.root1, point);
+            Node emt = t2.nearestNeighbor(t2.root1, point);
+            for (int j = 0; j < k+1; j++) { // niaz be eslah k baray adi k+1 bara knnclassify
+                
+                // if (emt != null){
                 ans[i][j] = emt.point[j];
-                //System.out.println(emt.point[0] + "\t" + emt.point[1]);
-                t2.root1 = t2.deleteNode(t2.root1, emt.point);
+                // System.out.println(emt.point[0] + "\t" + emt.point[1]);
+                // System.out.print("hey"+ans[i][j]+"\t");
+                 
             }
+           // System.out.print("\n");
+            t2.root1=t2.deleteNode(t2.root1, emt.point);
         }
 
-       
         return ans;
 
     }
