@@ -1,13 +1,13 @@
 public class KDTree {
-    int k;
-    Node root1 = null;
-    Node curr = null;
+    int k; // be tedad abad eshare mikonad
+    Node root1 = null; // rishe derakht ra negah midarad
 
-    public KDTree(int k) {
+    public KDTree(int k) { // sazande derakht kd tree
         this.k = k;
     }
 
-    public KDTree CreateTree(float[][] point) {
+    // ********************** marbooot be sakht derakht
+    public KDTree CreateTree(float[][] point) { // sakht derakht ba noghat mad nazar
         KDTree t2 = new KDTree(k);
         Node root = null;
         for (int i = 0; i < point.length; i++) {
@@ -15,12 +15,6 @@ public class KDTree {
         }
         return t2;
 
-    }
-
-    public KDTree insertCopy(Node r) {
-        KDTree t = new KDTree(k);
-        t.root1 = r;
-        return t;
     }
 
     public Node insertNode(Node root, float[] point) {
@@ -42,26 +36,9 @@ public class KDTree {
         return root;
 
     }
+    // **********************
 
-    public float distance(float[] point, Node parent) {
-        Double sum = 0.0;
-        Double a = 0.0;
-        Double b = 0.0;
-        Double c = 0.0;
-        Float reason;
-        for (int i = 0; i < k; i++) {
-            a = Double.valueOf(point[i]);
-            b = Double.valueOf(parent.point[i]);
-            c = a - b;
-            sum = sum + Math.pow(c, 2);
-            // System.out.println(a+"-"+b+"="+c+"\t"+sum);
-        }
-        sum = Math.sqrt(sum);
-        reason = sum.floatValue();
-        // System.out.println(reason);
-        return reason;
-    }
-
+    // ********************** marboot be point exist
     public boolean searchNode(Node root, float point[]) {
         return search(root, point, 0);
     }
@@ -69,7 +46,7 @@ public class KDTree {
     public boolean search(Node root, float point[], int depth) {
         if (root == null)
             return false;
-        if (arePointsSame(root.point, point))
+        if (arePointsSame(root.point, point)) // dar ghesmat delete
             return true;
         int cd = depth % k;
         if (point[cd] < root.point[cd])
@@ -77,14 +54,15 @@ public class KDTree {
 
         return search(root.right, point, depth + 1);
     }
+    // **********************
 
-    public boolean arePointsSame(float point1[], float point2[]) {
-        for (int i = 0; i < k; ++i)
-            if (point1[i] != point2[i])
-                return false;
-        return true;
-    }
-
+    // ********************** marboot be delete node
+    // dar delete kardan agar gere barg bood an ra hazf mikonim
+    // agar right!=null bood kochektarin adad dar haman bood ra peyda karde an node
+    // ra jaygozin va hazf mikonim
+    // agar left!=null bood kochektarin adad dar haman bood ra peyda karde an node
+    // ra jaygozin va hazf mikonim va hamchenin zir derakht left ro bayad tabdil
+    // konim be zir derakht rast an
     public Node deleteNode(Node root, float point[]) {
         return delete(root, point, 0);
     }
@@ -100,11 +78,10 @@ public class KDTree {
                 Node min = findMin(root.right, cd);
                 copyPoint(root.point, min.point);
                 root.right = delete(root.right, min.point, depth + 1);
-            } else if (root.left != null) // same as above
-            {
+            } else if (root.left != null) {
                 Node min = findMin(root.left, cd);
                 copyPoint(root.point, min.point);
-                root.left = delete(root.left, min.point, depth + 1); // khodam dorostesh kardam
+                root.left = delete(root.left, min.point, depth + 1);
             } else {
                 // delete root;
                 root = null;
@@ -119,9 +96,15 @@ public class KDTree {
         return root;
     }
 
-    void copyPoint(float p1[], float p2[]) {
-        for (int i = 0; i < k; i++)
-            p1[i] = p2[i];
+    public boolean arePointsSame(float point1[], float point2[]) {
+        for (int i = 0; i < k; ++i)
+            if (point1[i] != point2[i])
+                return false;
+        return true;
+    }
+
+    public Node findMin(Node root, int d) {
+        return findMinRec(root, d, 0);
     }
 
     public Node findMinRec(Node root, int d, int depth) {
@@ -139,11 +122,7 @@ public class KDTree {
                 findMinRec(root.right, d, depth + 1), d);
     }
 
-    public Node findMin(Node root, int d) {
-        return findMinRec(root, d, 0);
-    }
-
-    public Node minNode(Node x, Node y, Node z, int d) {
+    public Node minNode(Node x, Node y, Node z, int d) { // peyda kardan koochektarin bein 3 node
         Node res = x;
         if (y != null && y.point[d] < res.point[d])
             res = y;
@@ -152,6 +131,13 @@ public class KDTree {
         return res;
     }
 
+    void copyPoint(float p1[], float p2[]) {
+        for (int i = 0; i < k; i++)
+            p1[i] = p2[i];
+    }
+    // **********************
+
+    // ********************** marboot be peimayesh inorder
     public void inOrder(Node root) {
         if (root == null) {
             return;
@@ -167,7 +153,10 @@ public class KDTree {
             System.out.print(root.point[i] + " ");
         }
     }
+    // **********************
 
+    // ********************** marboot be peyda kardan yek hamsaye nazdik
+    // agar omgh derakht h bashad ma hadeaksar 2*h node ra mibinim
     public Node nearestNeighbor(Node root, float[] target) {
         return nearestNeighbor(root, target, 0);
     }
@@ -177,10 +166,10 @@ public class KDTree {
         if (root == null)
             return null;
 
-        Node nextBranch = null;
+        Node nextBranch = null; // next branch branchie ke node tosh on samte
         Node otherBranch = null;
         int cd = depth % k;
-        // compare the property appropriate for the current depth
+        // peyda kardan branch khode node
         if (target[cd] < root.point[cd]) {
             nextBranch = root.left;
             otherBranch = root.right;
@@ -189,23 +178,24 @@ public class KDTree {
             otherBranch = root.left;
         }
 
-        // recurse down the branch that's best according to the current depth
+        // mirim payeen baray peyda kardan behtarin node feli(parent yaftan)
         Node temp = nearestNeighbor(nextBranch, target, depth + 1);
-        Node best = closest(temp, root, target);
+        Node best = closest(temp, root, target); // dar inja best bein rishe va temp hast
+        float radius = distance(target, best); // mohasebe shoaa dar ebteda be onvan behtarin fasele
 
-        float radiusSquared = distance(target, best);
-
-        float dist = target[cd] - root.point[cd];
-
-        if (radiusSquared >= dist * dist) {
+        // peymayesh branch haye digar shayad noghte nazdiktary peyda beshe
+        float dist = target[cd] - root.point[cd]; // mohasebe fasele bein rishe va target dar bode mored nazar ba
+                                                  // distance fargh darad
+        if (radius >= dist) {
             temp = nearestNeighbor(otherBranch, target, depth + 1);
-            best = closest(temp, best, target);
+            best = closest(temp, best, target); // dar inja best bein best ghabli va temp hast
         }
-
         return best;
     }
 
     public Node closest(Node n0, Node n1, float[] target) {
+        // moshkhas mikonad bein 2 node ferestade shode kodam yek nazdiktar ast va digar
+        // amightar nemiravad
         if (n0 == null)
             return n1;
 
@@ -221,48 +211,56 @@ public class KDTree {
             return n1;
     }
 
-    public Node cloneBinaryTree(Node root) {
-        // base case
+    public float distance(float[] point, Node parent) {
+        Double sum = 0.0;
+        Double a = 0.0;
+        Double b = 0.0;
+        Double c = 0.0;
+        Float reason;
+        for (int i = 0; i < k; i++) { // barye eslah dar ferestadan k+1 bod mitavanim halghe ra i<k-1 konim
+            a = Double.valueOf(point[i]);
+            b = Double.valueOf(parent.point[i]);
+            c = a - b;
+            sum = sum + Math.pow(c, 2);
+        }
+        sum = Math.sqrt(sum);
+        reason = sum.floatValue();
+        return reason;
+    }
+    // **********************
+
+    // ********************** marboot ba peyda kardan knn
+    public float[][] findmnn(float[] point, int m, KDTree t1) {
+        KDTree t2 = new KDTree(k);
+        float[][] ans = new float[m][k + 2];
+        t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1)); // ba tavajoh be farakhani delete ma niaz be ek derakht copy
+                                                          // darim
+
+        for (int i = 0; i < m; i++) {
+            Node emt = t2.nearestNeighbor(t2.root1, point);
+            for (int j = 0; j < k; j++) {
+                ans[i][j] = emt.point[j];
+            }
+            t2.root1 = t2.deleteNode(t2.root1, emt.point);
+        }
+        return ans;
+    }
+
+    public Node cloneBinaryTree(Node root) { // baraye copy kardan derakht
         if (root == null) {
             return null;
         }
-
-        // create a new node with the same data as the root node
         Node root_copy = new Node(k, root.point);
-
-        // clone the left and right subtree
         root_copy.left = cloneBinaryTree(root.left);
         root_copy.right = cloneBinaryTree(root.right);
-
-        // return cloned root node
-        return root_copy;
+        return root_copy; // khorooji yek node rishe be hamrahe tamam farzandan on ast va nave va ...
     }
 
-    public float[][] findmnn(float[] point, int m, KDTree t1) {
-        KDTree t2 = new KDTree(k);
-       // t2.root1=t1.cloneBinaryTree(t1.root1);
-        
-        float[][] ans = new float[m][k + 2];
-        t2 = t1.insertCopy(t1.cloneBinaryTree(t1.root1));
-        //System.out.println(t1);
-        //System.out.println(t2);
-        //t2.inOrder(t2.root1);
-        for (int i = 0; i < m; i++) {
-            Node emt = t2.nearestNeighbor(t2.root1, point);
-            for (int j = 0; j < k; j++) { // niaz be eslah k baray adi k+1 bara knnclassify
-                
-               // System.out.print(emt.point[j]+" ");
-                ans[i][j] = emt.point[j];
-                // System.out.println(emt.point[0] + "\t" + emt.point[1]);
-                // System.out.print("hey"+ans[i][j]+"\t");
-                 
-            }
-           //System.out.print("***********************************\n");
-            t2.root1=t2.deleteNode(t2.root1, emt.point);
-        }
-
-        return ans;
-
+    public KDTree insertCopy(Node r) { // ijad derakht ba rishe ye dade shode
+        KDTree t = new KDTree(k);
+        t.root1 = r;
+        return t;
     }
+    // **********************
 
 }
