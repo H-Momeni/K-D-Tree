@@ -1,9 +1,11 @@
 public class KDTree {
     int k; // be tedad abad eshare mikonad
+    int Kreal; //baraye point exist va same
     Node root1 = null; // rishe derakht ra negah midarad
 
     public KDTree(int k) { // sazande derakht kd tree
         this.k = k;
+        Kreal = k - 1;
     }
 
     // ********************** marbooot be sakht derakht
@@ -48,7 +50,7 @@ public class KDTree {
             return false;
         if (arePointsSame(root.point, point)) // dar ghesmat delete
             return true;
-        int cd = depth % k;
+        int cd = depth % (Kreal); 
         if (point[cd] < root.point[cd])
             return search(root.left, point, depth + 1);
 
@@ -96,8 +98,8 @@ public class KDTree {
         return root;
     }
 
-    public boolean arePointsSame(float point1[], float point2[]) {
-        for (int i = 0; i < k; ++i)
+    public boolean arePointsSame(float point1[], float point2[]) { 
+        for (int i = 0; i < Kreal; ++i)
             if (point1[i] != point2[i])
                 return false;
         return true;
@@ -137,7 +139,7 @@ public class KDTree {
     }
     // **********************
 
-    // ********************** marboot be peimayesh inorder
+    // ********************** marboot be peimayesh inorder va chap on
     public void inOrder(Node root) {
         if (root == null) {
             return;
