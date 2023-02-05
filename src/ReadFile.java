@@ -33,6 +33,14 @@ public class ReadFile {
                 arr[i][k] = Float.parseFloat(parts1[i]);
             }          
         }
+
+        // for (int j = 0; j < 200; j++) {
+        //     for (int i = 0; i < 785; i++) {
+        //        System.out.print(arr[j][i]+" ");
+        //     }
+        //     System.out.print("\n");
+        // }
+        
         return arr;
     }
 
