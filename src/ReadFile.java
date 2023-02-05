@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-
-import javax.sound.midi.Patch;
-
 public class ReadFile {
 
     public float[][] Read(String path1, String path2) throws FileNotFoundException {
