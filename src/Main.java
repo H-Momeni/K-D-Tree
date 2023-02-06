@@ -21,8 +21,10 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
 
-        String pathNode = "C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\noghat.txt";
+        String pathNode = "C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\test.txt";
         String pathLabel = "C:\\Users\\ACER\\OneDrive\\Desktop\\K-D Tree\\src\\train.txt";
+        //String pathLabel = null;
+
 
         System.out.println("How many points do you want to enter?(KDTree nodes)");
         int num = input.nextInt();
@@ -44,6 +46,7 @@ public class Main {
         // KDTree tree = new KDTree(k);
 
         // tree = tree.CreateTree(point);
+    
 
         // System.out.println("What node do you want to add to the KDTree?");
         // float[] node = new float[k];
@@ -100,9 +103,9 @@ public class Main {
 
         // ********************** create KNNClassifier
 
-        System.out.println("How many points are you looking for?");
-        int number1 = input.nextInt();
-        KNNClassifier treeClassifier = new KNNClassifier(point, number1);
+        // System.out.println("How many points are you looking for?");
+        // int number1 = input.nextInt();
+        // KNNClassifier treeClassifier = new KNNClassifier(point, number1);
 
         // System.out.println("Enter the desired point:");
         // float[] searchPoint4 = new float[k];
@@ -128,21 +131,21 @@ public class Main {
         //     System.out.println(answer2[i]);
         // }
 
-        System.out.println("Enter the desired number of points: ");
-        int number3 = input.nextInt();
-        System.out.println("Please enter target points:");
-        float[][] searchPoint6 = new float[number3][k];
-        for (int i = 0; i < number3; i++) {
-            for (int j = 0; j < kReal; j++) {
-                searchPoint6[i][j] = input.nextFloat();
-            }
-        }
-        System.out.println("Enter correct label:");
-        float[] label = new float[number3];
-        for (int i = 0; i < number3; i++) {
-            label[i] = input.nextFloat();
-        }
-        treeClassifier.accuracy(searchPoint6, label, number3);
+        // System.out.println("Enter the desired number of points: ");
+        // int number3 = input.nextInt();
+        // System.out.println("Please enter target points:");
+        // float[][] searchPoint6 = new float[number3][k];
+        // for (int i = 0; i < number3; i++) {
+        //     for (int j = 0; j < kReal; j++) {
+        //         searchPoint6[i][j] = input.nextFloat();
+        //     }
+        // }
+        // System.out.println("Enter correct label:");
+        // float[] label = new float[number3];
+        // for (int i = 0; i < number3; i++) {
+        //     label[i] = input.nextFloat();
+        // }
+        // treeClassifier.accuracy(searchPoint6, label, number3);
 
         // ********************** Finish
     }

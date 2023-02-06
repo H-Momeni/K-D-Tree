@@ -2,7 +2,7 @@ public class KDTree {
     int k; // be tedad abad eshare mikonad
     int Kreal; // baraye point exist va same
     Node root1 = null; // rishe derakht ra negah midarad
-    String path2 = "full";  // bayad deghat she
+    String path2 = "full"; // bayad deghat she
 
     public KDTree(int k) { // sazande derakht kd tree
         this.k = k;
@@ -269,5 +269,6 @@ public class KDTree {
         return t;
     }
     // **********************
+
 
 }
